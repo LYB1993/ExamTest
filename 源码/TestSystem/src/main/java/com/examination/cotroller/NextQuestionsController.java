@@ -16,13 +16,13 @@ public class NextQuestionsController {
 
 	static List<TestQuestions> list;
 	private static Integer questNum = 0;
-	//private static Integer questSum = list.size();
-	//private static String[] answers = new String[questSum];
+	private static Integer questSum = 0;
+	private static String[] answers = null;
 	
 	@RequestMapping("toAnswer.do")
 	@ResponseBody
 	public String toFirstQuestion(){
-		
+
 		TestQuestions tq = new TestQuestions();
 		tq = list.get(questNum);
 		JSONObject jsonTQ = JSONObject.fromObject(tq);
@@ -33,7 +33,9 @@ public class NextQuestionsController {
 	@RequestMapping("next.do")
 	@ResponseBody
 	public String nextQuestion(){
-		list = PublicSession.getSessionValueToList();
+		if(list.isEmpty()){
+			init();
+		}
 		questNum++;
 		TestQuestions tq = new TestQuestions();
 		tq = list.get(questNum);
@@ -49,5 +51,11 @@ public class NextQuestionsController {
 		tq = list.get(questNum);
 		JSONObject jsonTQ = JSONObject.fromObject(tq);		
 		return jsonTQ.toString();
+	}
+	
+	public void init(){
+		list = PublicSession.getSessionValueToList();
+		questSum = list.size();
+		answers = new String[questSum];		
 	}
 }
