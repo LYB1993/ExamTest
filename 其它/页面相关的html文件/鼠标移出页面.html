@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>  
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+	</head>
+	<body>   
+	<h1 class="debug">Hello Plunker!</h1> 
+	</body>
+
+	<script>
+		var i = 0;
+		$(document).mouseleave(function() {
+			$('.debug').html('移出!');
+			i++;
+			if(i==3){
+				alert("888");
+			}
+		})
+		$(document).mouseenter(function() {
+			$('.debug').html('进入!');
+		})
+	</script>
+</html>
+
+
