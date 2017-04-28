@@ -1,0 +1,12 @@
+{
+  "success":true,
+  "result":{
+    "data.id":1,
+    "data.su":"用户名不存在",
+    "data.a":"",
+    "data.b":"",
+    "data.c":"",
+    "data.d":""
+  },
+  "error":false
+}
