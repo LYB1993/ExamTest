@@ -100,7 +100,8 @@ public class IndexCotroller {
 		String examName = request.getParameter("choice");
 		list = qd.findByExamName(examName);
 		ExamPage exampage = uploadDAO.findByexamName(examName);
-		request.setAttribute("questList", list);
+		//request.setAttribute("questList", list);
+		request.setAttribute("examSum", list.size());
 		request.setAttribute("examTime", exampage.getExamTime());
 		PublicSession.setSessionValueToExamName(examName);
 		PublicSession.setSessionValueToList(list);

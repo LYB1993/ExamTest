@@ -45,7 +45,7 @@ public class UploadDAOJdbclmpl implements UploadDAO{
 				TestQuestions question = new TestQuestions();
 				String[] str = questionlist.get(index).split(",");
 				question.setQuestId(Integer.valueOf(str[0].split("=")[1]));
-				question.setQuestAnswer(str[1]);
+				question.setQuestAnswer(str[1].split("=")[1]);
 				question.setQuestScore(Integer.valueOf(str[2].split("=")[1]));
 				question.setQuestBelongTo(str[3].split("=")[1]);
 				question.setQuestSubjct(questionlist.get(1+index));

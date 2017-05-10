@@ -21,7 +21,7 @@ public interface QuestScoreDAO {
 	 * @param sno
 	 * @return list集合 类型：成绩（Score）
 	 */
-	public List<Score> findBySno(Integer sno);
+	public List<Score> findBySno(Long sno);
 	/**
 	 * 添加成绩
 	 * @param user
@@ -47,4 +47,12 @@ public interface QuestScoreDAO {
 	 * 
 	 */
 	public List<WrongQuest> findWrongQuest(Float rate,String usercode);
+	/**
+	 * 添加错误的题目
+	 * @param examName 考试科目
+	 * @param errorSub 错误的题目
+	 * @param UserCode 用户名
+	 * @return 是否添加成功
+	 */
+	public boolean addWrongQuest(String examName,String errorSub,String UserCode);
 }

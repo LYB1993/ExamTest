@@ -143,7 +143,7 @@ public class LoginCotroller {
 		String userPhone = request.getParameter("phone");
 		String usernumcard = request.getParameter("numcard");
 		String useremail = request.getParameter("email");
-		Integer user_no = Integer.valueOf(userno);
+		Long user_no = Long.valueOf(userno);
 		User user = new User(userId, userCode, pwd1, userName,user_no,usernumcard, userPhone,useremail);
 		isadd=ud.addUser(user);
 		request.setAttribute("REGISTER", isadd);

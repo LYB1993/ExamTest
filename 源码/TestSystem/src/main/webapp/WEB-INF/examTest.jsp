@@ -34,6 +34,7 @@
       <header class="header dark-bg">
             <!--logo start-->
             <input id="examTime" type="hidden" value=${examTime }>
+            <input id="examSum" type="hidden" value=${examSum }>
             <a href="index.html" class="logo">考试 系统 <span class="lite"></span></a>
             <!--logo end-->
                  <div class="nav search-row" id="top_menu">
@@ -103,11 +104,13 @@
                                   <input id = "radio4" type=radio value="D">
                                   <strong id="QD"></strong> <!-- 这里显示D选项 -->
                               </div>
+                              <strong id="examnum"></strong>
                           </div> 
                           <div class="form-group">
-                             <div class="col-lg-offset-2 col-lg-10">
-                                 <button class="btn btn-primary" id="but1" type="submit">下一题</button> 
-                                 <input class="btn btn-primary" type="button" onclick="nextone();" value="下一题"> 
+                             <div class="col-lg-offset-2 col-lg-10"> 
+                                  <input class="btn btn-primary" id="returnNextone" type="button" onclick="returnnextone();" value="上一题">
+                                 <input class="btn btn-primary" id="nextOne"  type="button" onclick="nextone();" value="下一题">
+                                 <input class="btn btn-primary" id="endExam"  type="button" onclick="window.location.href='toSumitAnser.do'" value="提交">  
                              </div>
                           </div> 
                       </section>
@@ -143,7 +146,10 @@
 		});
 		$(document).mouseleave(function() {
 			alert("请注意");
-		})
+		});
+		$("#returnNextone").attr("disabled",false);
+		$("#nextOne").attr("disabled",false);
+		
     </script>
 </body>
 </html>

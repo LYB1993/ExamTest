@@ -45,7 +45,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 				user.setUserUnmcard(rs.getString(Constant.COLUMNNAME_USER_NUMCARD));
 				user.setUserPhone(rs.getString(Constant.COLUMNNAME_USER_PHONENUM));
 				user.setUserEmail(rs.getString(Constant.COLUMNNAME_USER_EMAIL));
-				user.setUserNo(rs.getInt(Constant.COLUMNNAME_USER_NO));
+				user.setUserNo(rs.getLong(Constant.COLUMNNAME_USER_NO));
 				user.setUserIdentity(rs.getString(Constant.COLUMNNAME_USER_IDENTITY));
 			}
 			
@@ -75,7 +75,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 			ps.setString(1, user.getUserCode());
 			ps.setString(2, user.getUserPwd());
 			ps.setString(3, user.getUserName());
-			ps.setInt(4, user.getUserNo());
+			ps.setLong(4, user.getUserNo());
 			ps.setString(5, user.getUserUnmcard());
 			ps.setString(6, user.getUserPhone());
 			ps.setString(7, user.getUserEmail());			
@@ -161,7 +161,7 @@ public class UserDAOJdbcImpl implements UserDAO{
 				user.setUserUnmcard(rs.getString(Constant.COLUMNNAME_USER_NUMCARD));
 				user.setUserPhone(rs.getString(Constant.COLUMNNAME_USER_PHONENUM));
 				user.setUserEmail(rs.getString(Constant.COLUMNNAME_USER_EMAIL));
-				user.setUserNo(rs.getInt(Constant.COLUMNNAME_USER_NO));
+				user.setUserNo(rs.getLong(Constant.COLUMNNAME_USER_NO));
 				user.setUserIdentity(rs.getString(Constant.COLUMNNAME_USER_IDENTITY)); 
 				userall.add(user);
 			}

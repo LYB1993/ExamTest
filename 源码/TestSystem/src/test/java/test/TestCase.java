@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.examination.dao.QuestDAO;
+import com.examination.dao.QuestScoreDAO;
 import com.examination.dao.UploadDAO;
 import com.examination.dao.UserDAO;
 import com.examination.entity.ExamPage;
@@ -59,7 +60,7 @@ public class TestCase {
 	@Test
 	public void DataAddUser(){
 		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
-		User user = new User(1001,"s1001","123456","超级管理员",6301, "410326199312235598","1562301881", "805864468@qq.com");
+		User user = new User(1001,"s1001","123456","超级管理员",6301L, "410326199312235598","1562301881", "805864468@qq.com");
 		UserDAO userDao = ac.getBean("userDAO",UserDAO.class);
 		System.out.println(userDao.addUser(user));
 		
@@ -133,6 +134,15 @@ public class TestCase {
 		List<TestQuestions> list = new ArrayList<TestQuestions>();
 		list = qd.findByExamName("这又是一个测试");
 		System.out.println(list.size());
+		
+	}
+	
+	//测试添加错误题目 测试通过
+	@Test
+	public void addWrong(){
+		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+		QuestScoreDAO qd = ac.getBean("questScoreDAO",QuestScoreDAO.class);
+		System.out.println(qd.addWrongQuest("jisuan", "12345", "admin"));
 		
 	}
 }

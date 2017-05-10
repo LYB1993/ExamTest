@@ -26,7 +26,7 @@ public class QuestScoreDAOJdbcImpl implements QuestScoreDAO{
 	private DataSource ds;
 	
 	
-	public List<Score> findBySno(Integer sno) {
+	public List<Score> findBySno(Long sno) {
 		List<Score> Slist = new ArrayList<Score>();
 		Connection conn=null;
 		PreparedStatement ps = null;
@@ -37,7 +37,7 @@ public class QuestScoreDAOJdbcImpl implements QuestScoreDAO{
 			//String sql = "select * from questscore where sno=?";
 			String sql = Constant.sql_questscoredao_findBySno;
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, sno);
+			ps.setLong(1, sno);
 			rs = ps.executeQuery();
 			while(rs.next()){
 				score = new Score();
@@ -74,7 +74,7 @@ public class QuestScoreDAOJdbcImpl implements QuestScoreDAO{
 			//System.out.println(TQ.getQuestId()+":"+TQ.getQuestBelongTo()+":"+user.getUserNo()+":"+user.getUserName()+":"+score);
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, examName);
-			ps.setInt(2, user.getUserNo());
+			ps.setLong(2, user.getUserNo());
 			ps.setString(3, user.getUserName());
 			ps.setInt(4, score);
 			ps.execute();
@@ -201,6 +201,76 @@ public class QuestScoreDAOJdbcImpl implements QuestScoreDAO{
 		}
 		
 		return wrongquest;
+	}
+
+
+	public boolean addWrongQuest(String examName, String errorSub, String UserCode) {
+//		String sqlSelect = "SELECT N_Error_Id,"
+//				+ "N_Error_ExamName,"
+//				+ "C_Error_Sub,"
+//				+ "C_Error_UserCode,"
+//				+ "N_Error_Num "
+//				+ "FROM t_error WHERE C_Error_Sub = ?";
+//		String sqlInsert = "INSERT INTO t_error (N_Error_ExamName,C_Error_Sub,C_Error_UserCode) VALUES(?,?,?)";
+//		String sqlUpdate = "update t_error set N_Error_Num = ? where N_error_Id = ?";
+		String sqlSelect = Constant.sql_questscoredao_addWrongQuest_Select;
+		String sqlInsert = Constant.sql_questscoredao_addWrongQuest_Insert;
+		String sqlUpdate = Constant.sql_questscoredao_addWrongQuest_Update;
+		Connection conn = null;
+		PreparedStatement psSelect = null;
+		PreparedStatement psInsert = null;
+		PreparedStatement psUpdate = null;
+		try {
+			conn = ds.getConnection();
+			psSelect = conn.prepareStatement(sqlSelect);
+			psInsert = conn.prepareStatement(sqlInsert);
+			psUpdate = conn.prepareStatement(sqlUpdate);
+			psSelect.setString(1, errorSub);
+			ResultSet rs = psSelect.executeQuery();
+			if(rs.next()){
+				if(rs.getString(Constant.COLUMNNAME_ERROR_EXAMNAME).equals(examName)&&
+						rs.getString(Constant.COLUMNNAME_ERROR_SUB).equals(errorSub)&&
+						rs.getString(Constant.COLUMNNAME_ERROR_USERCODE).equals(UserCode)){
+					//执行数据+1
+					Integer id = rs.getInt(Constant.COLUMNNAME_ERROR_ID);
+					Integer num = rs.getInt(Constant.COLUMNNAME_ERROR_NUM);
+					num += 1;
+					psUpdate.setInt(1, num);
+					psUpdate.setInt(2, id);
+					if(psUpdate.executeUpdate()==1){
+						return true;
+					}
+				}else{
+					//添加数据
+					psInsert.setString(1, examName);
+					psInsert.setString(2, errorSub);
+					psInsert.setString(3, UserCode);
+					if(psInsert.executeUpdate()==1){
+						return true;
+					}
+				}
+			}else{
+				//添加数据
+				psInsert.setString(1, examName);
+				psInsert.setString(2, errorSub);
+				psInsert.setString(3, UserCode);
+				if(psInsert.executeUpdate()==1){
+					return true;
+				}
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("addWrongQuest error:" +this.getClass().getName());
+			e.printStackTrace();
+		}finally{
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				System.out.println("database close false:"+this.getClass().getName());
+				e.printStackTrace();
+			}
+		}
+		return false;
 	}
 
 

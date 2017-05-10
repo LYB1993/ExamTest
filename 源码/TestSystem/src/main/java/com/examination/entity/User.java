@@ -17,7 +17,7 @@ public class User {
 	private Integer userId;
 	private String userCode;
 	private String userPwd;
-	private Integer userNo;
+	private Long userNo;
 	private String userIdentity;
 	private String userName;
 	private String userEmail;
@@ -28,7 +28,7 @@ public class User {
 	public User() {
 		super();
 	}
-	public User(Integer userId, String userCode, String userPwd, String userName, Integer userNo, String userUnmcard,
+	public User(Integer userId, String userCode, String userPwd, String userName, Long userNo, String userUnmcard,
 			String userPhone,String userEmail) {
 		super();
 		this.userId = userId;
@@ -46,10 +46,10 @@ public class User {
 	public void setUserIdentity(String userIdentity) {
 		this.userIdentity = userIdentity;
 	}
-	public Integer getUserNo() {
+	public Long getUserNo() {
 		return userNo;
 	}
-	public void setUserNo(Integer userNo) {
+	public void setUserNo(Long userNo) {
 		this.userNo = userNo;
 	}
 	public String getUserUnmcard() {

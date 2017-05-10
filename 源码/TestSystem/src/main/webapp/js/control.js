@@ -3,7 +3,7 @@ var WINDOW_HEIGHT=30;
 var RADIUS=0.5;
 var MARGINTOP=0;
 var MARGINLEFT=60;
-var examTime = document.getElementById("examTime").value;
+var examTime = parseInt(document.getElementById("examTime").value);
 console.log(examTime);
 const endTime=new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate(),new Date().getHours(),new Date().getMinutes()+examTime,0);
 var curShowTimeSeconds=0;
@@ -13,6 +13,7 @@ const colors=["#000000","#000000","#000000","#000000","#000000","#000000"
 ,"#000000","#000000","#000000","#000000"];
 	window.onload=function(){
 		console.log("考试界面");
+		firstone();
 		var canvas=document.getElementById("canvas");
 		var context=canvas.getContext("2d");
 		canvas.width=WINDOW_WIDTH;

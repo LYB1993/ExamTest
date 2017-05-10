@@ -125,6 +125,22 @@ public class Constant {
 				+ " where w."+COLUMNNAME_ERROR_USERCODE+" = u."+COLUMNNAME_USER_CODE+") put"
 				+ " where put.rate >= ? and put."+COLUMNNAME_ERROR_USERCODE+" = ?";
 	
+	public final static String sql_questscoredao_addWrongQuest_Select = "select "+COLUMNNAME_ERROR_ID+","
+																				+COLUMNNAME_ERROR_EXAMNAME+","
+																				+COLUMNNAME_ERROR_SUB+","
+																				+COLUMNNAME_ERROR_USERCODE+","
+																				+COLUMNNAME_ERROR_NUM+" "
+																				+"from "+TABLENAME_Error+" "
+																				+"where "+COLUMNNAME_ERROR_SUB+"=?";
+	public final static String sql_questscoredao_addWrongQuest_Insert = "insert into "
+																		+TABLENAME_Error+"("
+																		+COLUMNNAME_ERROR_EXAMNAME+","
+																		+COLUMNNAME_ERROR_SUB+","
+																		+COLUMNNAME_ERROR_USERCODE+")"
+																		+" values(?,?,?)";
+	public final static String sql_questscoredao_addWrongQuest_Update = "update "+TABLENAME_Error
+																		+" set "+COLUMNNAME_ERROR_NUM+"=?"
+																		+" where "+COLUMNNAME_ERROR_ID+"=?";
 	//UploadDAOJdbclmpl类使用的常量
 	public final static String sql_uplodadao_uploadMySQL = "insert into "+TBALENAME_Questions
 															+ " ("+COLUMNNAME_QUESTIONS_BELONG+","
